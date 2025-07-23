@@ -1,0 +1,136 @@
+<div class="floating-shapes">
+  <div class="shape"></div>
+  <div class="shape"></div>
+  <div class="shape"></div>
+</div>
+
+<div class="main-container">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-8 col-lg-10">
+        <div class="glass-card">
+          <!-- En-tête -->
+          <div class="header-section">
+            <h1 class="main-title">
+              <i class="fas fa-magic me-2"></i>
+              Text to Word AI
+            </h1>
+            <p class="subtitle">
+              Transformez votre texte en document Word professionnel avec l'IA
+            </p>
+            <div class="feature-badges">
+              <span class="badge-custom">
+                <i class="fas fa-robot me-1"></i>
+                IA Avancée
+              </span>
+              <span class="badge-custom">
+                <i class="fas fa-bolt me-1"></i>
+                Ultra Rapide
+              </span>
+              <span class="badge-custom">
+                <i class="fas fa-lock me-1"></i>
+                Sécurisé
+              </span>
+            </div>
+          </div>
+
+          <!-- Zone de saisie -->
+          <div class="input-section">
+            <label class="form-label-custom">
+              <i class="fas fa-pen-fancy me-2"></i>
+              Saisissez votre texte
+            </label>
+            <div class="textarea-wrapper">
+              <textarea 
+                [(ngModel)]="userText"
+                class="form-control-custom" 
+                rows="8" 
+                placeholder="Écrivez ou collez votre texte ici... L'IA va l'améliorer et corriger automatiquement la grammaire, le style et la clarté. ✨"
+                [disabled]="isLoading">
+              </textarea>
+              <div class="char-counter">{{ userText.length || 0 }} caractères</div>
+            </div>
+          </div>
+
+          <!-- Messages d'erreur/succès -->
+          <div *ngIf="errorMessage" class="alert-custom">
+            <i class="fas fa-exclamation-circle me-2"></i>
+            <span>{{ errorMessage }}</span>
+          </div>
+
+          <div *ngIf="successMessage" class="alert-success-custom">
+            <i class="fas fa-check-circle me-2"></i>
+            <span>{{ successMessage }}</span>
+          </div>
+
+          <!-- Boutons d'action -->
+          <div class="action-section">
+            <button 
+              class="btn-custom" 
+              (click)="generateWord()" 
+              [disabled]="isLoading || !userText.trim() || userText.trim().length < 5">
+              <span *ngIf="!isLoading">
+                <i class="fas fa-file-word me-2"></i>
+                Générer Word
+              </span>
+              <span *ngIf="isLoading">
+                <span class="spinner-custom me-2"></span>
+                Traitement...
+              </span>
+            </button>
+            
+            <button 
+              class="btn-secondary-custom" 
+              (click)="clearText()"
+              [disabled]="isLoading">
+              <i class="fas fa-eraser me-2"></i>
+              Effacer
+            </button>
+          </div>
+
+          <!-- Barre de progression -->
+          <div *ngIf="isLoading" class="progress-section">
+            <div class="progress-bar-custom">
+              <div class="progress-fill"></div>
+            </div>
+            <p class="progress-text">
+              <i class="fas fa-cog fa-spin me-2"></i>
+              L'IA améliore votre texte...
+            </p>
+          </div>
+
+          <!-- Informations -->
+          <div class="footer-info">
+            <h5 class="info-header">
+              <i class="fas fa-question-circle me-2"></i>
+              Comment ça fonctionne ?
+            </h5>
+            <div class="info-grid">
+              <div class="info-item">
+                <div class="info-icon">
+                  <i class="fas fa-keyboard"></i>
+                </div>
+                <h6 class="info-title">1. Saisie du texte</h6>
+                <p class="info-desc">Écrivez ou collez votre texte dans l'éditeur</p>
+              </div>
+              <div class="info-item">
+                <div class="info-icon">
+                  <i class="fas fa-brain"></i>
+                </div>
+                <h6 class="info-title">2. Traitement IA</h6>
+                <p class="info-desc">Notre IA corrige et améliore votre texte</p>
+              </div>
+              <div class="info-item">
+                <div class="info-icon">
+                  <i class="fas fa-file-export"></i>
+                </div>
+                <h6 class="info-title">3. Téléchargement</h6>
+                <p class="info-desc">Obtenez votre document Word amélioré</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
